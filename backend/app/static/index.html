@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submission Review</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <h1>Submission Review</h1>
+        <p class="sub">Commercial auto · fictional exercise data · not a coverage decision</p>
+      </div>
+      <div class="topbar-right">
+        <span id="overall" class="badge hidden"></span>
+        <span id="model" class="model">Model: checking…</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Upload -->
+    <section id="upload-section" class="card">
+      <h2>1. Supply one submission packet</h2>
+      <form id="upload-form">
+        <div class="upload-grid">
+          <label id="dropzone" class="dropzone" for="files">
+            <strong>Choose files</strong> or drop them here
+            <span class="hint">Broker email (.txt / .eml), application and loss runs (.pdf), vehicle schedule (.csv)</span>
+            <input id="files" name="files" type="file" multiple accept=".txt,.eml,.pdf,.csv">
+          </label>
+          <div>
+            <label for="email-text" class="label">Or paste the broker email</label>
+            <textarea id="email-text" name="email_text" rows="7" placeholder="Paste the email body here…"></textarea>
+          </div>
+        </div>
+        <ul id="file-list" class="file-list"></ul>
+        <div class="actions">
+          <button id="analyze-btn" type="submit" class="btn" disabled>Analyze submission</button>
+          <button id="new-packet-btn" type="button" class="btn secondary hidden">New submission</button>
+          <span id="status" class="status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Results (hidden until a packet is processed) -->
+    <div id="results" class="hidden">
+      <section class="card">
+        <h2>Processing</h2>
+        <ol id="stages" class="stages"></ol>
+      </section>
+
+      <section class="card">
+        <h2>2. Rule results</h2>
+        <table class="table" id="rules-table">
+          <thead><tr><th>Rule</th><th>Status</th><th>Reason</th><th>Values used</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div id="open-items-box">
+          <h3>Items to resolve <span class="muted">(derived from the rules by code)</span></h3>
+          <ul id="open-items"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. Extracted fields and evidence</h2>
+        <p class="muted">Click a row to see its evidence. Use <em>Correct</em> to enter a confirmed value; the original extraction is kept.</p>
+        <table class="table" id="fields-table">
+          <thead><tr><th>Field</th><th>Value</th><th>State</th><th>Source</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Attachments received</h2>
+        <table class="table" id="attachments-table">
+          <thead><tr><th>File</th><th>Detected type</th><th>Readable</th><th>Note</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>4. Underwriter summary</h2>
+          <span id="narrative-label" class="muted"></span>
+        </div>
+        <div id="stale-notice" class="notice warn hidden">
+          Results changed after this text was written.
+          <button id="regen-btn" type="button" class="btn small">Regenerate summary and email</button>
+        </div>
+        <div id="summary" class="summary"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>5. Draft follow-up email</h2>
+          <span class="pill">Draft only · not sent</span>
+        </div>
+        <textarea id="draft-email" rows="16" aria-label="Draft follow-up email"></textarea>
+        <div class="actions">
+          <button id="copy-btn" type="button" class="btn secondary">Copy to clipboard</button>
+          <span id="copy-status" class="status"></span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "knight-submission-review"
+version = "0.1.0"
+description = "Underwriter submission review assistant (candidate exercise)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.143.3",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.1",
+    "pydantic-settings==2.16.0",
+    "pypdf==6.21.1",
+    "python-multipart==0.0.32",
+    "anthropic==1.15.0",
+    "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
